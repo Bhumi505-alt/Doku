@@ -8,9 +8,8 @@ const router = express.Router();
 
 router.post("/new",isAuthenticated, newtask);
 router.get("/my",isAuthenticated, getmytask);
-
-router.get("/dashboard/weekly", isAuthenticated, getWeeklyDashboard);
 router.route("/:id").put( isAuthenticated,updateTask).delete( isAuthenticated,deletetask);
+router.get("/dashboard/weekly", isAuthenticated, getWeeklyDashboard);
 
 
 

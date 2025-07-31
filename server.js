@@ -6,17 +6,12 @@ import userRouter from "./routes/user.routes.js"
 import { connectDB} from "./data/database.js"
 import cookieParser from "cookie-parser";
 import cors from "cors";
-
  
+
+const app = express();
 config({
     path:"./data/config.env",
 });
-
-const app = express();
-const PORT = process.env.PORT || 4000;
-
-
-
  //isko router se uper rakho bar bar error de rha hai 
 //using a middleware
 app.use(cors({
@@ -35,6 +30,6 @@ app.get("/" , (req, res)=>{
 res.send("working server working")
 });
 
-app.listen(PORT,()=>{
-console.log(`server is working on ${PORT} in ${process.env.NODE_ENV} Mode`);
+app.listen(4000,()=>{
+console.log("server is working ");
 })

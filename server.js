@@ -12,13 +12,16 @@ const app = express();
 config({
     path:"./data/config.env",
 });
+console.log("FRONTEND_URI:", process.env.FRONTEND_URI);
  //isko router se uper rakho bar bar error de rha hai 
 //using a middleware
 app.use(cors({
     origin:[process.env.FRONTEND_URI],
+    
     methods:["GET", "POST", "PUT", "DELETE"],
     credentials: true,
 }))
+
 
 app.use(express.json());
 app.use(cookieParser());

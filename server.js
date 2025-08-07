@@ -22,10 +22,10 @@ app.use(cors({
     credentials: true,
 }))
 
-
+ connectDB();
 app.use(express.json());
 app.use(cookieParser());
- connectDB();
+
 app.use("/users", userRouter);
 app.use("/tasks", taskRouter);
 

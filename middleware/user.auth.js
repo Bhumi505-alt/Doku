@@ -1,18 +1,24 @@
 import { User } from "../models/user.js";
 import jwt from "jsonwebtoken";
 
-export const isAuthenticated = async (req, res, next)=>{
+export const isAuthenticated = async (req, res, next) => {
+  const { token } = req.cookies;
 
-    const {token}= req.cookies;
-  
-    
-    if(!token)
-      return res.status(404).json({
-    success:false,
-    message: "not logged in "});
-    
-    const decoded = jwt.verify(token,process.env.JWT_SECRET);
-    
+  if (!token) {
+    return res.status(401).json({
+      success: false,
+      message: "Not logged in"
+    });
+  }
+
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
     req.user = await User.findById(decoded._id);
-next();
-}
+    next(); // ✅ Route can continue
+  } catch (err) {
+    return res.status(401).json({
+      success: false,
+      message: "Invalid or expired token"
+    });
+  }
+};

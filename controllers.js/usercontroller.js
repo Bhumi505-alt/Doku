@@ -106,7 +106,7 @@ export const logout = (req, res) => {
     .cookie("token", "", {
       httpOnly: true,
       expires: new Date(0), // clears the cookie
-      sameSite: "lax",      // adjust based on frontend-backend origin
+      sameSite: "none",      // adjust based on frontend-backend origin
       secure: false         // set to true if using HTTPS
     })
     .json({
